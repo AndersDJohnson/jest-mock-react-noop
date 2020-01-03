@@ -35,6 +35,6 @@
   },
   "scripts": {
     "test": "jest",
-    "build": "tsc --outFile dist/main.js src/jest-mock-react-noop.js"
+    "build": "tsc"
   }
 }
