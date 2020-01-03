@@ -28,7 +28,7 @@ describe("App", () => {
   test("works", () => {
     const { debug } = render(<App />);
 
-    console.log(debug());
+    debug();
   });
 });
 ```
