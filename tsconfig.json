@@ -1,13 +1,23 @@
 {
-    "strict": true,
-    "include": [
-        "./src/*"
+  "files": [
+    "./node_modules/@testing-library/jest-dom/extend-expect.d.ts",
+    "./types.d.ts"
+  ],
+  "strict": true,
+  "include": [
+    "./src/*"
+  ],
+  "compilerOptions": {
+    "lib": [
+      "dom",
+      "es2015"
     ],
-    "compilerOptions": {
-        "lib": [
-            "dom",
-            "es2015"
-        ],
-        "jsx": "react"
-    }
+    "jsx": "react",
+    "target": "es5",
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "outDir": "dist"
+  }
 }
