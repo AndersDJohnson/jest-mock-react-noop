@@ -1,5 +1,17 @@
 # jest-mock-react-noop
 
+Mock React components to noops with Jest.
+
+This helps emulate shallow rendering you remember from `enzyme`
+but with `@testing-library/react` instead.
+
+You can use `jest.mock` to re-define `react`,
+providing the original implementation as well
+as an argument indicating which component(s)
+to target.
+Any component not targeted will be replaced with
+one that returns `null`.
+
 ```tsx
 import * as React from "react";
 import { render } from "@testing-library/react";
