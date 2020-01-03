@@ -3,7 +3,19 @@
   "version": "1.0.0",
   "description": "Mock React components to noops with Jest.",
   "license": "ISC",
-  "keywords": [],
+  "keywords": [
+    "react",
+    "react-testing-library",
+    "@testing-library/react",
+    "testing-library",
+    "mock",
+    "jest",
+    "noop",
+    "component",
+    "mount",
+    "shallow",
+    "enzyme"
+  ],
   "main": "dist/index.js",
   "dependencies": {
     "react-display-name": "^0.2.5"
