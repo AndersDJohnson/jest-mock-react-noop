@@ -9,8 +9,9 @@ const makeNoop = (name: string) => {
 };
 
 const jestMockReactNoop = (
-    react: typeof React,
-    fn: string | RegExp | ((name: string, type: string | FC | ComponentClass) => boolean | undefined)) => ({
+  fn: string | RegExp | ((name: string, type: string | FC | ComponentClass) => boolean | undefined),
+  react: typeof React = jest.requireActual("react")
+) => ({
   ...react,
   createElement(...args: Parameters<typeof React.createElement>) {
     const type = args[0];
