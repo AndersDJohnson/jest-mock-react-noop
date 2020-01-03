@@ -2,6 +2,7 @@
   "name": "jest-mock-react-noop",
   "version": "1.0.0",
   "description": "Mock React components to noops with Jest.",
+  "license": "ISC",
   "keywords": [],
   "main": "dist/index.js",
   "dependencies": {
@@ -21,6 +22,7 @@
     "typescript": "3.3.3"
   },
   "scripts": {
+    "test": "jest",
     "build": "tsc --outFile dist/main.js src/jest-mock-react-noop.js"
   }
 }

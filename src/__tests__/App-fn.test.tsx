@@ -4,7 +4,7 @@ import { App } from "../App";
 
 jest.mock("react", () =>
   // @ts-ignore
-  require("..").default(jest.requireActual("react"), 'App')
+  require("..").default(jest.requireActual("react"), name => name === 'App')
 );
 
 describe("App", () => {

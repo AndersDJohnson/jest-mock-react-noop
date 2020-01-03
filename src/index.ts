@@ -15,16 +15,18 @@ const jestMockReactNoop = (
   createElement(...args: Parameters<typeof React.createElement>) {
     const type = args[0];
     const name = getDisplayName(type);
-    let matches;
-    if (typeof fn === 'string') {
-      matches = fn === name;
-    } else if (fn instanceof RegExp) {
-      matches = fn.test(name);
-    } else if (typeof fn === 'function') {
-      matches = fn(name, type);
-    }
-    if (!matches) {
-      return react.createElement(makeNoop(name));
+    if (typeof type !== 'string') {
+      let matches;
+      if (typeof fn === 'string') {
+        matches = fn === name;
+      } else if (fn instanceof RegExp) {
+        matches = fn.test(name);
+      } else if (typeof fn === 'function') {
+        matches = fn(name, type);
+      }
+      if (!matches) {
+        return react.createElement(makeNoop(name));
+      }
     }
     return react.createElement(...args);
   }
