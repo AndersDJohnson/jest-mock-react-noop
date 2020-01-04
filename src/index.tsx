@@ -3,7 +3,7 @@ import getDisplayName from 'react-display-name';
 import { ComponentClass, FC } from "react";
 
 const makeNoop = (name: string) => {
-  const noop = () => null;
+  const noop = () => <div data-jest-mock-react-noop={name} />;
   noop.displayName = name;
   return noop;
 };
@@ -32,5 +32,12 @@ const jestMockReactNoop = (
     return react.createElement(...args);
   }
 });
+
+const makeQueryByNoop = (container: HTMLElement) => (name: string) =>
+  container.querySelector(`[data-jest-mock-react-noop="${name}"]`);
+
+const queryByNoop = (container: HTMLElement, name: string) => makeQueryByNoop(container)(name);
+
+export { makeQueryByNoop, queryByNoop };
 
 export default jestMockReactNoop;

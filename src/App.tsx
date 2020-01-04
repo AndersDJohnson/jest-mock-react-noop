@@ -1,7 +1,7 @@
 import * as React from "react";
 
 function Other() {
-  return <div data-test="other">Other!</div>;
+  return <div data-testid="other">Other!</div>;
 }
 
 function App() {
