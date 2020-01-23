@@ -93,3 +93,21 @@ describe("App", () => {
   });
 });
 ```
+
+Sometimes `jest.mock` as above won't work, e.g., with `ts-jest` you might get this error:
+
+```
+TypeError: require(...).default is not a function
+```
+
+If so, you can try this:
+
+```ts
+jest.mock("react", () => ({
+  ...jest.requireActual('react'),
+createElement: jest.fn()
+}));
+
+// @ts-ignore
+React.createElement.mockImplementation(require('jest-mock-react-noop').default('App').createElement);
+```
