@@ -1,8 +1,8 @@
 # jest-mock-react-noop
 
-⚛️:construction::goat:
-
 > Mock React components to noops with Jest.
+
+⚛️:construction::goat:
 
 Remember shallow rendering from [`enzyme`](https://airbnb.io/enzyme/)?
 Wish you could have it with [`@testing-library/react`](https://testing-library.com/docs/react-testing-library/intro)?
