@@ -9,12 +9,13 @@ Wish you could have it with [`@testing-library/react`](https://testing-library.c
 Now you can!
 
 Use [`jest.mock`](https://jestjs.io/docs/en/jest-object#jestmockmodulename-factory-options)
-to re-define `react`, providing `jest-mock-react-noop` with an argument indicating the component(s) under test.
-Any component not under test will be replaced with one that returns a placeholder empty `div`
+to re-define `react` as `jest-mock-react-noop`, providing it with an argument indicating the component(s) under test.
+`jest-mock-react-noop` returns a monkeypatched version of React with a modified `createElement` function.
+When rendering, any component not under test will be replaced with one that returns a placeholder empty `div`
 with a `data-jest-mock-react-noop` attribute whose value is that component's name.
 
 You can query for placeholder `div`s using the following query functions
-(similar to [`@testing-library`'s query functions](https://testing-library.com/docs/dom-testing-library/api-queries) functions):
+(similar to [`@testing-library`'s query functions](https://testing-library.com/docs/dom-testing-library/api-queries)):
 * `getByNoop`
 * `getAllByNoop`
 * `queryByNoop`
@@ -27,6 +28,7 @@ import { renderWithNoop } from "jest-mock-react-noop";
 import { App } from "../App";
 
 jest.mock("react", () =>
+  // @ts-ignore
   require("jest-mock-react-noop").default('App')
 );
 
@@ -105,9 +107,11 @@ If so, you can try this:
 ```ts
 jest.mock("react", () => ({
   ...jest.requireActual('react'),
-createElement: jest.fn()
+  createElement: jest.fn()
 }));
 
-// @ts-ignore
-React.createElement.mockImplementation(require('jest-mock-react-noop').default('App').createElement);
+React.createElement.mockImplementation(
+  // @ts-ignore
+  require('jest-mock-react-noop').default('App').createElement
+);
 ```
