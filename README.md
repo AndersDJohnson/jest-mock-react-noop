@@ -1,19 +1,17 @@
 # jest-mock-react-noop
-# ⚛️:construction::goat:
 
-Mock React components to noops with Jest.
+⚛️:construction::goat:
 
-This helps emulate shallow rendering you remember from [`enzyme`](https://airbnb.io/enzyme/)
-but with [`@testing-library/react`](https://testing-library.com/docs/react-testing-library/intro) instead.
+> Mock React components to noops with Jest.
 
-You can use [`jest.mock`](https://jestjs.io/docs/en/jest-object#jestmockmodulename-factory-options)
-to re-define `react`, providing an argument indicating which component(s) to target.
-Any component not targeted will be replaced with
-one that returns a placeholder `div`.
-The argument can be a string or regex matched against the component
-display name, or else a function that receives two arguments:
-the component display name,
-and the component function/constructor or tag name string.
+Remember shallow rendering from [`enzyme`](https://airbnb.io/enzyme/)?
+Wish you could have it with [`@testing-library/react`](https://testing-library.com/docs/react-testing-library/intro)?
+Now you can!
+
+Use [`jest.mock`](https://jestjs.io/docs/en/jest-object#jestmockmodulename-factory-options)
+to re-define `react`, providing `jest-mock-react-noop` with an argument indicating the component(s) under test.
+Any component not under test will be replaced with one that returns a placeholder empty `div`
+with a `data-jest-mock-react-noop` attribute whose value is that component's name.
 
 You can query for placeholder `div`s using the following query functions
 (similar to [`@testing-library`'s query functions](https://testing-library.com/docs/dom-testing-library/api-queries) functions):
