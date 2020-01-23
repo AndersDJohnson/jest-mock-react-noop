@@ -1,6 +1,5 @@
 import * as React from "react";
-import { render } from "@testing-library/react";
-import { queryByNoop } from "..";
+import { renderWithNoop } from "..";
 import { App } from "../App";
 
 jest.mock("react", () => ({
@@ -13,11 +12,9 @@ React.createElement.mockImplementation(require('..').default(name => name === 'A
 
 describe("App", () => {
   test("works", () => {
-    const { debug, container, queryByTestId } = render(<App />);
-
-    debug();
+    const { queryByNoop, queryByTestId } = renderWithNoop(<App />);
 
     expect(queryByTestId("other")).not.toBeInTheDocument();
-    expect(queryByNoop(container, 'Other')).toBeInTheDocument();
+    expect(queryByNoop( 'Other')).toBeInTheDocument();
   });
 });

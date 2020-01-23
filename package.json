@@ -22,7 +22,8 @@
     "react-display-name": "^0.2.5"
   },
   "peerDependencies": {
-    "react": "^16.8.4"
+    "react": "^16",
+    "@testing-library/react": "9^"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^4.2.4",
@@ -30,9 +31,13 @@
     "@types/jest": "^24.0.25",
     "@types/react": "16.8.8",
     "@types/react-dom": "16.8.2",
+    "@types/testing-library__jest-dom": "^5.0.0",
+    "@types/testing-library__react": "^9.1.2",
     "jest": "^24.9.0",
+    "react": "^16.8.4",
+    "react-dom": "^16.12.0",
     "ts-jest": "^24.2.0",
-    "typescript": "3.3.3"
+    "typescript": "^3.7.5"
   },
   "scripts": {
     "test": "jest",

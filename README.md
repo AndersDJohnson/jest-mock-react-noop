@@ -1,13 +1,13 @@
 # jest-mock-react-noop
+# ⚛️:construction::goat:
 
 Mock React components to noops with Jest.
 
-This helps emulate shallow rendering you remember from `enzyme`
-but with `@testing-library/react` instead.
+This helps emulate shallow rendering you remember from [`enzyme`](https://airbnb.io/enzyme/)
+but with [`@testing-library/react`](https://testing-library.com/docs/react-testing-library/intro) instead.
 
-You can use `jest.mock` to re-define `react`,
-providing an argument indicating which component(s)
-to target.
+You can use [`jest.mock`](https://jestjs.io/docs/en/jest-object#jestmockmodulename-factory-options)
+to re-define `react`, providing an argument indicating which component(s) to target.
 Any component not targeted will be replaced with
 one that returns a placeholder `div`.
 The argument can be a string or regex matched against the component
@@ -15,13 +15,17 @@ display name, or else a function that receives two arguments:
 the component display name,
 and the component function/constructor or tag name string.
 
-You can query for placeholder `div`s using the `queryByNoop`
-utility included in this package - see below for usage.
+You can query for placeholder `div`s using the following query functions
+(similar to [`@testing-library`'s query functions](https://testing-library.com/docs/dom-testing-library/api-queries) functions):
+* `getByNoop`
+* `getAllByNoop`
+* `queryByNoop`
+* `queryAllByNoop`
 
 ```tsx
+import "@testing-library/jest-dom";
 import * as React from "react";
-import { render } from "@testing-library/react";
-import { queryByNoop } from "jest-mock-react-noop";
+import { renderWithNoop } from "jest-mock-react-noop";
 import { App } from "../App";
 
 jest.mock("react", () =>
@@ -30,19 +34,27 @@ jest.mock("react", () =>
 
 describe("App", () => {
   test("works", () => {
-    const { debug, container } = render(<App />);
-
-    debug();
+    const { queryByNoop } = renderWithNoop(<App />);
 
     // Assert that a nested component is rendered only as a noop.
-    expect(queryByNoop(container, 'Other')).toBeInTheDocument();
+    expect(queryByNoop('Other')).toBeInTheDocument();
   });
 });
 ```
 
+You can match components by name with string:
+
+```ts
+require("jest-mock-react-noop").default('App')
+```
+
+Or with regular expression:
+
 ```ts
 require("jest-mock-react-noop").default(/App/)
 ```
+
+Or with a function returning a `boolean` (which also gives you access to the component constructor):
 
 ```ts
 require("jest-mock-react-noop").default(
@@ -52,28 +64,34 @@ require("jest-mock-react-noop").default(
 )
 ```
 
-Alternative to `queryByNoop`, which requires passing `container`,
-you can curry it with the `makeQueryByNoop` factory as follows:
+If you prefer to configure `queries` manually and use the native `render` instead of our `renderWithNoop`,
+you can import either `noopQueries` (with type `NoopQueries`) or `noopQueriesWithDefaults` (with type and `NoopQueriesWithDefaults`, which includes the defaults from `@testing-library/react`).
 
 ```tsx
-import * as React from "react";
-import { render } from "@testing-library/react";
-import { makeQueryByNoop } from "jest-mock-react-noop";
-import { App } from "../App";
-
-jest.mock("react", () =>
-  require("jest-mock-react-noop").default('App')
-);
+import { render, queries } from "@testing-library/react";
+import { noopQueries, NoopQueriesWithDefaults} from "..";
 
 describe("App", () => {
   test("works", () => {
-    const { debug, container } = render(<App />);
-    const queryByNoop = makeQueryByNoop(container);
+    const { queryByNoop, queryByTestId } = render<NoopQueriesWithDefaults>(<App />, {
+      queries: {
+        ...queries,
+        ...noopQueries
+      }
+    });
+  });
+});
+```
 
-    debug();
+```tsx
+import { render } from "@testing-library/react";
+import { noopQueriesWithDefaults, NoopQueriesWithDefaults} from "..";
 
-    // Assert that a nested component is rendered only as a noop.
-    expect(queryByNoop(container, 'Other')).toBeInTheDocument();
+describe("App", () => {
+  test("works", () => {
+    const { queryByNoop, queryByTestId } = render<NoopQueriesWithDefaults>(<App />, {
+      queries: noopQueriesWithDefaults
+    });
   });
 });
 ```
