@@ -69,7 +69,10 @@ you can import either `noopQueries` (with type `NoopQueries`) or `noopQueriesWit
 
 ```tsx
 import { render, queries } from "@testing-library/react";
-import { noopQueries, NoopQueriesWithDefaults} from "..";
+import {
+  noopQueries,
+  NoopQueriesWithDefaults
+} from "jest-mock-react-noop";
 
 describe("App", () => {
   test("works", () => {
@@ -85,7 +88,10 @@ describe("App", () => {
 
 ```tsx
 import { render } from "@testing-library/react";
-import { noopQueriesWithDefaults, NoopQueriesWithDefaults} from "..";
+import {
+  noopQueriesWithDefaults,
+  NoopQueriesWithDefaults
+} from "jest-mock-react-noop";
 
 describe("App", () => {
   test("works", () => {
