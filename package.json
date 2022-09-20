@@ -3,6 +3,7 @@
   "version": "2.0.1",
   "description": "Mock React components to noops with Jest.",
   "repository": "AndersDJohnson/jest-mock-react-noop",
+  "funding": "https://github.com/sponsors/AndersDJohnson",
   "license": "ISC",
   "keywords": [
     "react",
